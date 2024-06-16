@@ -51,6 +51,9 @@ class Post(models.Model):
     def __str__(self) -> str:
         return self.title
 
+    def comments_count(self):
+        return len(self.comment.all())
+
 class Recipe(models.Model):
     name = models.CharField(max_length=100)
     serves = models.CharField(max_length=50)
