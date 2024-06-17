@@ -31,7 +31,7 @@
                                         </div>
                                         <div class="categories__post__item__text">
                                             <span class="post__label">{{ post.category }}</span>
-                                            <h3><a href="#">{{ post.title }}</a></h3>
+                                            <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
                                             <ul class="post__widget">
                                                 <li>by <span>{{ post.author }}</span></li>
                                                 <li>3 min read</li>

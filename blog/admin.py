@@ -45,6 +45,7 @@ class PostAdmin(admin.ModelAdmin):
         "category",
         "create_at",
     ]
+
     readonly_fields = ["post_photo", "create_at"]
     inlines = [RecipeInline]
 
@@ -68,6 +69,8 @@ class PostAdmin(admin.ModelAdmin):
     def colored_category(self, obj: Post):
         if obj.category.name == "Vegan":
             color_code = "00FF00"
+        else:
+            color_code = "000000"
         html = '<span style="color: #{};">{}</span>'.format(color_code, obj.category.name)
         return format_html(html)
 
