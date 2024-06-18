@@ -1,7 +1,7 @@
 from unicodedata import category
 from django.views.generic import DetailView, ListView, TemplateView
 
-from blog.models import Category, Post, Recipe
+from blog.models import Category, Post, Recipe, Tag
 
 
 class HomeView(TemplateView):
@@ -27,9 +27,21 @@ class PostDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['title'] = Post.objects.get(slug=self.kwargs['slug']).title
         context['recipe'] = Recipe.objects.get(post__slug=self.kwargs['slug'])
-        context['ingredients'] = context['recipe'].ingredients.split('\n')
-        context['directions'] = context['recipe'].directions.split('\n')
+        # context['ingredients'] = context['recipe'].ingredients.split('\n')
+        # context['directions'] = context['recipe'].directions.split('\n')
         return context
 
     def get_queryset(self):
         return Post.objects.filter(slug=self.kwargs['slug']).select_related('category')
+
+
+class TagsListView(ListView):
+    template_name = 'blog/post_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = Tag.objects.get(slug=self.kwargs.get('slug')).name
+        return context
+
+    def get_queryset(self):
+        return Post.objects.filter(tags__slug=self.kwargs['slug'])

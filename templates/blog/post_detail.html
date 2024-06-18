@@ -37,7 +37,7 @@
                         </ul>
                     </div>
                     <div class="single-post__top__text">
-                        <p>{{ post.text|slice:":250" }}</p>
+                        <p>{{ post.pre_text|safe }}</p>
                     </div>
                     <div class="single-post__recipe__details">
                         <div class="single-post__recipe__details__option">
@@ -59,33 +59,22 @@
                         </div>
                         <div class="single-post__recipe__details__indegradients">
                             <h5>Ingredients</h5>
-                                {% for ingredient in ingredients %}
-                                    <ul>
-                                        <li>
-                                            {{ ingredient }}
-                                        </li>
-                                    </ul>
-                                {% endfor %}
+                            {{ recipe.ingredients|safe }}
+                                
                         </div>
                         <div class="single-post__recipe__details__direction">
                             <h5>Directions</h5>
-                            {% for direction in directions %}
-                                <ul>
-                                    <li>
-                                        {{ direction }}
-                                    </li>
-                                </ul>
-                        {% endfor %}
+                            {{ recipe.directions|safe }}
                         </div>
                     </div>
                  
                     <div class="single-post__desc">
-                        <p>{{ post.text|slice:"250:" }}</p>
+                        <p>{{ post.after_text|safe }}</p>
                     </div>
                    
                     <div class="single-post__tags">
                         {% for tag in post.tags.all %}
-                            <a href="#">{{ tag }}</a>
+                            <a href="{{ tag.get_absolute_url }}">{{ tag }}</a>
                         {% endfor %}
                     </div>
                     <div class="single-post__next__previous">

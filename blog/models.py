@@ -30,6 +30,10 @@ class Tag(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    def get_absolute_url(self):
+        return reverse("tags", kwargs={"slug": self.slug})
+    
+
 
 class Post(models.Model):
     author = models.ForeignKey(
@@ -38,8 +42,8 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
     image = models.ImageField(upload_to="articles/%Y/%m/%d")
-    pre_text = RichTextField()
-    after_text = RichTextField()
+    pre_text = RichTextField(config_name='awesome_ckeditor')
+    after_text = RichTextField(config_name='awesome_ckeditor')
     category = models.ForeignKey(
         Category, related_name="post", on_delete=models.SET_NULL, null=True
     )
@@ -64,8 +68,8 @@ class Recipe(models.Model):
     serves = models.CharField(max_length=50)
     prep_time = models.PositiveIntegerField(default=0)
     cook_time = models.PositiveIntegerField(default=0)
-    ingredients = RichTextField()
-    directions = RichTextField()
+    ingredients = RichTextField(config_name='awesome_ckeditor')
+    directions = RichTextField(config_name='awesome_ckeditor')
     post = models.ForeignKey(
         to=Post, related_name="recipe", on_delete=models.SET_NULL, null=True, blank=True
     )
