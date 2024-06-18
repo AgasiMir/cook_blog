@@ -28,6 +28,7 @@ class PostDetailView(DetailView):
         context['title'] = Post.objects.get(slug=self.kwargs['slug']).title
         context['recipe'] = Recipe.objects.get(post__slug=self.kwargs['slug'])
         context['ingredients'] = context['recipe'].ingredients.split('\n')
+        context['directions'] = context['recipe'].directions.split('\n')
         return context
 
     def get_queryset(self):

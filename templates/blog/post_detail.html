@@ -59,32 +59,23 @@
                         </div>
                         <div class="single-post__recipe__details__indegradients">
                             <h5>Ingredients</h5>
-                                {% for ing in ingredients %}
+                                {% for ingredient in ingredients %}
                                     <ul>
                                         <li>
-                                            {{ ing }}
+                                            {{ ingredient }}
                                         </li>
                                     </ul>
                                 {% endfor %}
                         </div>
                         <div class="single-post__recipe__details__direction">
                             <h5>Directions</h5>
-                            <ul>
-                                <li><span>1.</span> Combine all of the ingredients, kneading to form a smooth dough.
-                                </li>
-                                <li><span>2.</span> Allow the dough to rise, in a lightly greased, covered bowl, until
-                                    it’s doubled in size, about 90 minutes.</li>
-                                <li><span>3.</span> Gently divide the dough in half; it’ll deflate somewhat.</li>
-                                <li><span>4.</span> Gently shape the dough into two oval loaves; or, for longer loaves,
-                                    two 10″ to 11″ logs. Place the loaves on a lightly greased or parchment-lined baking
-                                    sheet. Cover and let rise until very puffy, about 1 hour. Towards the</li>
-                                <li><span>5.</span> end of the rising time, preheat the oven to 425°F.</li>
-                                <li><span>6.</span> Spray the loaves with lukewarm water.</li>
-                                <li><span>7.</span> Make two fairly deep diagonal slashes in each; a serrated bread
-                                    knife, wielded firmly, works well here.</li>
-                                <li><span>8.</span> Bake the bread for 25 to 30 minutes, until it’s a very deep golden
-                                    brown. Remove it from the oven, and cool on a rack.</li>
-                            </ul>
+                            {% for direction in directions %}
+                                <ul>
+                                    <li>
+                                        {{ direction }}
+                                    </li>
+                                </ul>
+                        {% endfor %}
                         </div>
                     </div>
                  
