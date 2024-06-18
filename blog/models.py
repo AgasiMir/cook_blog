@@ -1,4 +1,4 @@
-import email
+from ckeditor.fields import RichTextField
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
@@ -38,7 +38,8 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
     image = models.ImageField(upload_to="articles/%Y/%m/%d")
-    text = models.TextField()
+    pre_text = RichTextField()
+    after_text = RichTextField()
     category = models.ForeignKey(
         Category, related_name="post", on_delete=models.SET_NULL, null=True
     )
@@ -63,8 +64,8 @@ class Recipe(models.Model):
     serves = models.CharField(max_length=50)
     prep_time = models.PositiveIntegerField(default=0)
     cook_time = models.PositiveIntegerField(default=0)
-    ingredients = models.TextField()
-    directions = models.TextField()
+    ingredients = RichTextField()
+    directions = RichTextField()
     post = models.ForeignKey(
         to=Post, related_name="recipe", on_delete=models.SET_NULL, null=True, blank=True
     )

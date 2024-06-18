@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
 
     'mptt',
-    # 'debug_toolbar'
+    # 'debug_toolbar',
+    'ckeditor_uploader',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -126,7 +128,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
 STATICFILES_DIRS = [BASE_DIR / 'static']
+
+CKEDITOR_CONFIGS = {
+    'awesome_ckeditor': {
+        'toolbar': 'full',
+        'height': 300,
+    },
+}
 
 
 MEDIA_URL = '/media/'
