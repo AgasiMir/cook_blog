@@ -1,11 +1,13 @@
 from unicodedata import category
-from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic import DetailView, ListView
 
 from blog.models import Category, Post, Recipe, Tag
 
 
-class HomeView(TemplateView):
-    template_name = 'base.html'
+class HomeView(ListView):
+    model = Post
+    paginate_by = 9
+    template_name = 'blog/home.html'
     extra_context = {'title': 'Home'}
 
 
