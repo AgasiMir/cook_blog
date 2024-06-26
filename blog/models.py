@@ -4,6 +4,8 @@ from django.db import models
 from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
 
+from services.utils import unique_slugify
+
 
 class Category(MPTTModel):
     name = models.CharField(max_length=100)
@@ -32,7 +34,6 @@ class Tag(models.Model):
 
     def get_absolute_url(self):
         return reverse("tags", kwargs={"slug": self.slug})
-    
 
 
 class Post(models.Model):
@@ -59,6 +60,14 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post_detail', kwargs={'slug': self.slug})
+
+    def save(self, *args, **kwargs):
+        """
+        При сохранении генерируем слаг и проверяем на уникальность
+        """
+        if not self.slug:
+            self.slug = unique_slugify(self, self.title)
+        super().save(*args, **kwargs)
 
     def comments_count(self):
         return len(self.comment.all())

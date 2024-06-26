@@ -1,4 +1,4 @@
-from unicodedata import category
+from typing import Any, Dict
 from django.views.generic import DetailView, ListView
 
 from blog.models import Category, Post, Recipe, Tag

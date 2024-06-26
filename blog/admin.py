@@ -3,6 +3,7 @@ from django.utils.safestring import mark_safe
 from mptt.admin import MPTTModelAdmin
 from django.utils.html import format_html
 
+
 from .models import Category, Tag, Post, Recipe, Comment
 
 
@@ -31,14 +32,15 @@ class PostAdmin(admin.ModelAdmin):
         "create_at",
     ]
     list_display_links = ["photo", "short_title"]
-    prepopulated_fields = {"slug": ("title",)}
+    # prepopulated_fields = {"slug": ("title",)}
 
+    save_as = True
     save_on_top = True
     fields = [
         "author",
         "post_photo",
         "title",
-        "slug",
+        # "slug",
         "pre_text",
         "after_text",
         "image",
